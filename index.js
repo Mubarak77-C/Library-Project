@@ -6,18 +6,19 @@ const myLibrary = [];
 
 
 //2. create construction function Book 
-function Book(id, author, title, numberPage) {
+function Book(id, author, title, numberPage, read) {
     this.id = id;
     this.author = author;
     this.title = title;
     this.numberPage = numberPage;
+    this.read = read; // boolean (true/false)
 
 }
 // 3. Function to create a book and push it to the array
-function addBookToLibrary(author, title, numberPage) {
+function addBookToLibrary(author, title, numberPage, read) {
     // Generate a simple unique ID based on array length or random
     const id = myLibrary.length + 1;
-    const newBook = new Book(id, author, title, numberPage);
+    const newBook = new Book(id, author, title, numberPage, read);
     myLibrary.push(newBook);
 }
 
@@ -32,9 +33,11 @@ bookForm.addEventListener("submit", function (event) {
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
     const numberPage = document.querySelector("#pages").value;
-   
+    // Grab the checkbox status (true if checked, false if not)
+    const read = document.querySelector("#read").checked;
+
     // Pass the values into your function (Order: author, title, numberPage)
-    addBookToLibrary(author, title, Number(numberPage));
+    addBookToLibrary(author, title, Number(numberPage), read);
 
     // Clear out the form inputs
     bookForm.reset();
@@ -43,14 +46,14 @@ bookForm.addEventListener("submit", function (event) {
     console.log("Updated Library Array:", myLibrary);
     // Re-render the library so the new book appears on screen!
     renderLibrary();
-   
+
 });
 
 
 // Function to display all books on the screen
 function renderLibrary() {
     const libraryContainer = document.querySelector("#library-container");
-    
+
     // 1. Clear the container first so we don't duplicate old cards
     libraryContainer.innerHTML = "";
 
@@ -62,11 +65,16 @@ function renderLibrary() {
         const bookCard = document.createElement("div");
         bookCard.classList.add("book-card");
 
+        // Display "Read" or "Not Read Yet" based on the boolean
+        let readStatus = book.read ? "Read" : "Not Read Yet";
+
         // Add the book details inside the card using template literals
         bookCard.innerHTML = `
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Pages:</strong> ${book.numberPage}</p>
+            <p><strong>Status:</strong> ${readStatus}</p>
+            <button class="toggle-read-btn" data-index="${i}">Toggle Read</button>
             <button class="delete-btn" data-index="${i}">Delete Book</button>
         `;
 
@@ -80,15 +88,18 @@ function renderLibrary() {
 const libraryContainer = document.querySelector("#library-container");
 
 libraryContainer.addEventListener("click", function (event) {
-    // Check if the clicked element is a delete button
+    const index = event.target.getAttribute("data-index");
+
+    // If they clicked the delete button
     if (event.target.classList.contains("delete-btn")) {
-        // Get the index from the data-index attribute
-        const bookIndex = event.target.getAttribute("data-index");
+        myLibrary.splice(index, 1);
+        renderLibrary();
+    }
 
-        // Remove that book from the myLibrary array
-        myLibrary.splice(bookIndex, 1);
-
-        // Re-render the screen so the card disappears
+    // If they clicked the toggle read button
+    if (event.target.classList.contains("toggle-read-btn")) {
+        // Flip the boolean value (true becomes false, false becomes true)
+        myLibrary[index].read = !myLibrary[index].read;
         renderLibrary();
     }
 });
@@ -96,9 +107,9 @@ libraryContainer.addEventListener("click", function (event) {
 
 
 // 5. Initial test books (3 arguments only: author, title, pages)
- addBookToLibrary("robin", "JS", 4);
+addBookToLibrary("robin", "JS", 4, true);
 
-addBookToLibrary("John Doe", "DOM Mastery", 200);
+addBookToLibrary("John Doe", "DOM Mastery", 200, false);
 
 // 6. Loop through the array and fetch each key/value
 console.log("--- Fetching Library Books ---");
