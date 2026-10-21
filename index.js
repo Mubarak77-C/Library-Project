@@ -29,16 +29,31 @@ function addBookToLibrary(id, author, title, numberPage) {
 // 4. Call the function to add books
 const fetch = addBookToLibrary(1, "robin", "JS", 4);
 // console.log(fetch);  //undefined because we aadding this data to empty arr since we know how to fetch data from arr by loop
+addBookToLibrary(2, "John Doe", "DOM Mastery", 200);
 
 // 5. Loop through the array and fetch each key/value
 console.log("--- Fetching Library Books ---");
 
-for (let i = 0; i < myLibrary.length; i++) {
-    let currentBook = myLibrary[i];
-    console.log(`\n Book Index ${i} : `);
+// for (let i = 0; i < myLibrary.length; i++) {
+//     let currentBook = myLibrary[i];
+//     console.log(`\n Book Index ${i} : `);
 
-    for (key in currentBook) {
-        console.log(` ${key} -> ${currentBook[key]}`);
+//     for (key in currentBook) {
+//         console.log(` ${key} -> ${currentBook[key]}`);
+//     }
+// }
+
+//using secure loop for of 
+// --- LOOPING SECTION ---
+
+
+// 1. Use FOR...OF to loop through the array of books
+for (let book of myLibrary) {
+    console.log("\n--- Book Details ---");
+
+    // 2. Use Object.entries() to safely loop through the keys and values of the book object
+    for (let [key, value] of Object.entries(book)) {
+        console.log(`${key}: ${value}`);
     }
 }
 
