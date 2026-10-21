@@ -39,7 +39,8 @@ bookForm.addEventListener("submit", function (event) {
     // Clear out the form inputs
     bookForm.reset();
 
-
+    // ADD THIS LINE to see the updated array right away in the console!
+    console.log("Updated Library Array:", myLibrary);
    
 });
 
