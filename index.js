@@ -67,6 +67,7 @@ function renderLibrary() {
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Pages:</strong> ${book.numberPage}</p>
+            <button class="delete-btn" data-index="${i}">Delete Book</button>
         `;
 
         // Append the card to the container on the page
@@ -74,6 +75,23 @@ function renderLibrary() {
     }
 }
 
+//DELETE BTN 
+// Select the library container
+const libraryContainer = document.querySelector("#library-container");
+
+libraryContainer.addEventListener("click", function (event) {
+    // Check if the clicked element is a delete button
+    if (event.target.classList.contains("delete-btn")) {
+        // Get the index from the data-index attribute
+        const bookIndex = event.target.getAttribute("data-index");
+
+        // Remove that book from the myLibrary array
+        myLibrary.splice(bookIndex, 1);
+
+        // Re-render the screen so the card disappears
+        renderLibrary();
+    }
+});
 
 
 
