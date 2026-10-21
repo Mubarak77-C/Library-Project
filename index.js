@@ -41,11 +41,38 @@ bookForm.addEventListener("submit", function (event) {
 
     // ADD THIS LINE to see the updated array right away in the console!
     console.log("Updated Library Array:", myLibrary);
+    // Re-render the library so the new book appears on screen!
+    renderLibrary();
    
 });
 
 
+// Function to display all books on the screen
+function renderLibrary() {
+    const libraryContainer = document.querySelector("#library-container");
+    
+    // 1. Clear the container first so we don't duplicate old cards
+    libraryContainer.innerHTML = "";
 
+    // 2. Loop through the array and create a card for each book
+    for (let i = 0; i < myLibrary.length; i++) {
+        let book = myLibrary[i];
+
+        // Create a card div
+        const bookCard = document.createElement("div");
+        bookCard.classList.add("book-card");
+
+        // Add the book details inside the card using template literals
+        bookCard.innerHTML = `
+            <h3>${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p><strong>Pages:</strong> ${book.numberPage}</p>
+        `;
+
+        // Append the card to the container on the page
+        libraryContainer.appendChild(bookCard);
+    }
+}
 
 
 
