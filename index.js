@@ -21,7 +21,7 @@ function addBookToLibrary(author, title, numberPage) {
     myLibrary.push(newBook);
 }
 
-//dom graping or access the html attribute each with btn
+// 4. DOM grabbing & Event Listener for the form
 //a .selecting form element
 const bookForm = document.querySelector("#book-form");
 bookForm.addEventListener("submit", function (event) {
@@ -32,16 +32,15 @@ bookForm.addEventListener("submit", function (event) {
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
     const numberPage = document.querySelector("#pages").value;
-
-    // Pass the values into your function
+   
+    // Pass the values into your function (Order: author, title, numberPage)
     addBookToLibrary(author, title, Number(numberPage));
 
     // Clear out the form inputs
     bookForm.reset();
 
 
-    addBookToLibrary(title, author, pages);
-    bookForm.reset();
+   
 });
 
 
@@ -50,27 +49,13 @@ bookForm.addEventListener("submit", function (event) {
 
 
 
+// 5. Initial test books (3 arguments only: author, title, pages)
+ addBookToLibrary("robin", "JS", 4);
 
-// 4. Call the function to add books
-const fetch = addBookToLibrary(1, "robin", "JS", 4);
-// console.log(fetch);  //undefined because we aadding this data to empty arr since we know how to fetch data from arr by loop
-addBookToLibrary(2, "John Doe", "DOM Mastery", 200);
+addBookToLibrary("John Doe", "DOM Mastery", 200);
 
-// 5. Loop through the array and fetch each key/value
+// 6. Loop through the array and fetch each key/value
 console.log("--- Fetching Library Books ---");
-
-// for (let i = 0; i < myLibrary.length; i++) {
-//     let currentBook = myLibrary[i];
-//     console.log(`\n Book Index ${i} : `);
-
-//     for (key in currentBook) {
-//         console.log(` ${key} -> ${currentBook[key]}`);
-//     }
-// }
-
-//using secure loop for of 
-// --- LOOPING SECTION ---
-
 
 // 1. Use FOR...OF to loop through the array of books
 for (let book of myLibrary) {
