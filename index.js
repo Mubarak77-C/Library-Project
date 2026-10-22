@@ -41,7 +41,16 @@ function Book(id, author, title, numberPage, read) {
     this.numberPage = numberPage;
     this.read = read; // boolean (true/false)
 
+
+
 }
+
+// 10  PROTOTYPE METHOD HERE
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+};
+
+
 // 3. Function to create a book and push it to the array
 function addBookToLibrary(author, title, numberPage, read) {
     // Generate a simple unique ID based on array length or random
@@ -143,7 +152,9 @@ libraryContainer.addEventListener("click", function (event) {
     // If they clicked the toggle read button
     if (event.target.classList.contains("toggle-read-btn")) {
         // Flip the boolean value (true becomes false, false becomes true)
-        myLibrary[index].read = !myLibrary[index].read;
+        // myLibrary[index].read = !myLibrary[index].read;
+        // 11. CHANGE THIS LINE to use the prototype method
+        myLibrary[index].toggleRead();
         saveLibraryToStorage(); // 👉 SAVE TO LOCALSTORAGE
         renderLibrary();
     }
@@ -188,9 +199,16 @@ function loadLibraryFromStorage() {
         // Parse the JSON string back into a normal JS array of objects
         const parsed = JSON.parse(storedLibrary);
 
+
         // Re-assign or map them back so they are actual Book instances if needed, 
         // or just load them directly into myLibrary:
-        return parsed;
+        return parsed.map(book => new Book(
+            book.id, 
+            book.author, 
+            book.title, 
+            book.numberPage, 
+            book.read
+        ));;
     }
     return []; // Return empty array if nothing in storage
 }
