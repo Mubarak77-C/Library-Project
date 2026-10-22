@@ -55,3 +55,11 @@ console.log(postTitle);
 console.log(email);
 console.log(firtTag);
 console.log(status);
+
+// Destructuring right inside the function parameters!
+function printBookInfo({ title, author }) {
+    console.log(`${title} by ${author}`);
+}
+
+const myFavBook = { title: "JS Mastery", author: "Robin", pages: 100 };
+printBookInfo(myFavBook); // "JS Mastery by Robin"
