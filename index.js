@@ -19,6 +19,20 @@ cancelBtn.addEventListener("click", () => {
     bookDialog.close();
 });
 
+//9.3 
+// Close modal when clicking on the grey backdrop outside the dialog
+bookDialog.addEventListener("click", (event) => {
+    const dialogDimensions = bookDialog.getBoundingClientRect();
+    if (
+        event.clientX < dialogDimensions.left ||
+        event.clientX > dialogDimensions.right ||
+        event.clientY < dialogDimensions.top ||
+        event.clientY > dialogDimensions.bottom
+    ) {
+        bookDialog.close();
+    }
+});
+
 //2. create construction function Book 
 function Book(id, author, title, numberPage, read) {
     this.id = id;
