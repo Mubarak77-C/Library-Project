@@ -1,8 +1,9 @@
 console.log('hi')
 
 //1. create empty array 
-const myLibrary = [];
-
+//const myLibrary = [];
+// 1. Load from localStorage or start empty
+let myLibrary = loadLibraryFromStorage();
 
 
 //2. create construction function Book 
@@ -20,6 +21,9 @@ function addBookToLibrary(author, title, numberPage, read) {
     const id = myLibrary.length + 1;
     const newBook = new Book(id, author, title, numberPage, read);
     myLibrary.push(newBook);
+
+    // 👉 SAVE TO LOCALSTORAGE
+    saveLibraryToStorage();
 }
 
 // 4. DOM grabbing & Event Listener for the form
@@ -93,6 +97,7 @@ libraryContainer.addEventListener("click", function (event) {
     // If they clicked the delete button
     if (event.target.classList.contains("delete-btn")) {
         myLibrary.splice(index, 1);
+        saveLibraryToStorage(); // 👉 SAVE TO LOCALSTORAGE
         renderLibrary();
     }
 
@@ -100,6 +105,7 @@ libraryContainer.addEventListener("click", function (event) {
     if (event.target.classList.contains("toggle-read-btn")) {
         // Flip the boolean value (true becomes false, false becomes true)
         myLibrary[index].read = !myLibrary[index].read;
+        saveLibraryToStorage(); // 👉 SAVE TO LOCALSTORAGE
         renderLibrary();
     }
 });
@@ -110,6 +116,8 @@ libraryContainer.addEventListener("click", function (event) {
 addBookToLibrary("robin", "JS", 4, true);
 
 addBookToLibrary("John Doe", "DOM Mastery", 200, false);
+// 👉 ADD THIS LINE HERE so they show up on screen immediately
+renderLibrary();
 
 // 6. Loop through the array and fetch each key/value
 console.log("--- Fetching Library Books ---");
@@ -124,5 +132,22 @@ for (let book of myLibrary) {
     }
 }
 
+//7.local Storage
+// Save the current array to localStorage
+function saveLibraryToStorage() {
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
 
-
+// Load the array from localStorage (if it exists)
+function loadLibraryFromStorage() {
+    const storedLibrary = localStorage.getItem("myLibrary");
+    if (storedLibrary) {
+        // Parse the JSON string back into a normal JS array of objects
+        const parsed = JSON.parse(storedLibrary);
+        
+        // Re-assign or map them back so they are actual Book instances if needed, 
+        // or just load them directly into myLibrary:
+        return parsed;
+    }
+    return []; // Return empty array if nothing in storage
+}
