@@ -113,9 +113,13 @@ libraryContainer.addEventListener("click", function (event) {
 
 
 // 5. Initial test books (3 arguments only: author, title, pages)
-addBookToLibrary("robin", "JS", 4, true);
+//// 5. Initial test books (Only add them if the library is completely empty)
+if (myLibrary.length === 0) {
+    addBookToLibrary("robin", "JS", 4, true);
 
-addBookToLibrary("John Doe", "DOM Mastery", 200, false);
+    addBookToLibrary("John Doe", "DOM Mastery", 200, false);
+}
+
 // 👉 ADD THIS LINE HERE so they show up on screen immediately
 renderLibrary();
 
@@ -144,7 +148,7 @@ function loadLibraryFromStorage() {
     if (storedLibrary) {
         // Parse the JSON string back into a normal JS array of objects
         const parsed = JSON.parse(storedLibrary);
-        
+
         // Re-assign or map them back so they are actual Book instances if needed, 
         // or just load them directly into myLibrary:
         return parsed;
