@@ -177,12 +177,14 @@ renderLibrary();
 console.log("--- Fetching Library Books ---");
 
 // 1. Use FOR...OF to loop through the array of books
-for (let book of myLibrary) {
-    console.log("\n--- Book Details ---");
-
-    // 2. Use Object.entries() to safely loop through the keys and values of the book object
-    for (let [key, value] of Object.entries(book)) {
-        console.log(`${key}: ${value}`);
+//12. Optional: A helper function to inspect your library in the console if needed
+function logLibrary() {
+    console.log("--- Fetching Library Books ---");
+    for (let book of myLibrary) {
+        console.log("\n--- Book Details ---");
+        for (let [key, value] of Object.entries(book)) {
+            console.log(`${key}: ${value}`);
+        }
     }
 }
 
