@@ -61,6 +61,8 @@ function renderLibrary() {
     // 1. Clear the container first so we don't duplicate old cards
     libraryContainer.innerHTML = "";
 
+    updateStats();
+
     // 2. Loop through the array and create a card for each book
     for (let i = 0; i < myLibrary.length; i++) {
         let book = myLibrary[i];
@@ -154,4 +156,26 @@ function loadLibraryFromStorage() {
         return parsed;
     }
     return []; // Return empty array if nothing in storage
+}
+
+//8.count stat with
+//to think it just array total book so arr.length 
+//read status count- we just need to arr.filter(arra=>arra.read ===true).length //it boolean return with length if true 
+//unread status count -unread = total book length - read book length
+
+// Function to calculate and update stats
+function updateStats() {
+    const totalBooks = myLibrary.length;
+
+    // Count how many books have read === true
+    // We can use the .filter() method or a simple loop
+    const readBooks = myLibrary.filter(book => book.read === true).length;
+    const unreadBooks = totalBooks - readBooks;
+
+    console.log(`the count stat totat book is : ${totalBooks} and \n read status: ${readBooks} \n unread status : ${unreadBooks} `)
+
+    // Grab the span elements from the DOM
+    document.querySelector("#stat-total").textContent = totalBooks;
+    document.querySelector("#stat-read").textContent = readBooks;
+    document.querySelector("#stat-unread").textContent = unreadBooks;
 }
