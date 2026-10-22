@@ -47,3 +47,13 @@ dialog::backdrop {
     justify-content: space-between;
     margin-top: 15px;
 }
+
+/* Style for Read books (e.g., subtle green border/accent) */
+.book-card.is-read {
+    border-left: 5px solid #22c55e; 
+}
+
+/* Style for Unread books (e.g., subtle orange/yellow border/accent) */
+.book-card.is-unread {
+    border-left: 5px solid #f59e0b; 
+}

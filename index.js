@@ -101,6 +101,13 @@ function renderLibrary() {
         const bookCard = document.createElement("div");
         bookCard.classList.add("book-card");
 
+        // 👉 Add a status class depending on whether it's read or not
+        if (book.read) {
+            bookCard.classList.add("is-read");
+        } else {
+            bookCard.classList.add("is-unread");
+        }
+
         // Display "Read" or "Not Read Yet" based on the boolean
         let readStatus = book.read ? "Read" : "Not Read Yet";
 
