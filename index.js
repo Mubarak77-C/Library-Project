@@ -4,7 +4,20 @@ console.log('hi')
 //const myLibrary = [];
 // 1. Load from localStorage or start empty
 let myLibrary = loadLibraryFromStorage();
+// Modal Elements
+const bookDialog = document.querySelector("#book-dialog");
+const openModalBtn = document.querySelector("#open-modal-btn");
+const cancelBtn = document.querySelector("#cancel-btn");
 
+// 9.1. Open the modal
+openModalBtn.addEventListener("click", () => {
+    bookDialog.showModal();
+});
+
+// 9.2. Close the modal when clicking Cancel
+cancelBtn.addEventListener("click", () => {
+    bookDialog.close();
+});
 
 //2. create construction function Book 
 function Book(id, author, title, numberPage, read) {
@@ -45,6 +58,9 @@ bookForm.addEventListener("submit", function (event) {
 
     // Clear out the form inputs
     bookForm.reset();
+
+    // 👉 CLOSE THE MODAL AFTER SUBMITTING
+    bookDialog.close();
 
     // ADD THIS LINE to see the updated array right away in the console!
     console.log("Updated Library Array:", myLibrary);
