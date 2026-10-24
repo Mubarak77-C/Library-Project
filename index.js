@@ -2,18 +2,20 @@
 let myLibrary = loadLibraryFromStorage();
 
 // 2. Create constructor function Book 
-function Book(id, author, title, numberPage, read) {
-    this.id = id;
-    this.author = author;
-    this.title = title;
-    this.numberPage = numberPage;
-    this.read = read; // boolean (true/false)
+class Book {
+    constructor(id, author, title, numberPage, read) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.numberPage = numberPage;
+        this.read = read; // boolean (true/false)
+    }
+    // Prototype method for toggling read status
+    toggleRead() {
+        this.read = !this.read;
+    }
 }
 
-// Prototype method for toggling read status
-Book.prototype.toggleRead = function() {
-    this.read = !this.read;
-};
 
 // Storage helper functions
 function saveLibraryToStorage() {
