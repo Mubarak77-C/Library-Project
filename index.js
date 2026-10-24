@@ -1,5 +1,3 @@
-// 1. Load from localStorage or start empty
-let myLibrary = loadLibraryFromStorage();
 
 // 2. Create constructor function Book 
 class Book {
@@ -15,6 +13,13 @@ class Book {
         this.read = !this.read;
     }
 }
+
+// 1. Load from localStorage or start empty
+//why taken here below class because it error 
+//Uncaught ReferenceError: can't access lexical declaration 'Book' before initialization
+//JavaScript throws a "Temporal Dead Zone" error-mean exit class
+//JavaScript classes are not hoisted(mean allocate memory to variable,method, class function )
+let myLibrary = loadLibraryFromStorage();
 
 
 // Storage helper functions
