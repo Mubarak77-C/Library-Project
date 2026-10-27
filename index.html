@@ -1,59 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Project</title>
     <script src="index.js" defer></script>
-     <script src="destructing.js" defer></script>
-    <link rel="stylesheet" href="index.css">
-    
-</head>
+    <script src="destructing.js" defer></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<body>
+  <body>
     <h1>My Library</h1>
     <!-- Button to open the modal -->
     <button id="open-modal-btn">Add New Book</button>
 
     <!-- Modal Dialog wrapping the form -->
     <dialog id="book-dialog">
-        <form id="book-form">
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" required>
-            </div>
-
-            <div>
-                <label for="author">Author:</label>
-                <input type="text" id="author" required>
-            </div>
-            <div>
-                <label for="pages">Pages:</label>
-                <input type="number" id="pages" required>
-            </div>
-
-            <div>
-                <label for="read">Have you read this book?</label>
-                <input type="checkbox" id="read">
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" id="addbtn">Add Book</button>
-                <button type="button" id="cancel-btn">Cancel</button>
-            </div>
-        </form>
-        </dialog>
-
-        <!-- Stats Counter Section -->
-        <div id="stats-container" class="stats-card">
-            <p>Total Books: <span id="stat-total">0</span></p>
-            <p>Read: <span id="stat-read">0</span></p>
-            <p>Not Read: <span id="stat-unread">0</span></p>
+      <form id="book-form" novalidate>
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title" required />
+          <span class="error-message" id="title-error"></span>
         </div>
 
-        <!-- Where our book cards will show up -->
-        <div id="library-container"></div>
-</body>
+        <div>
+          <label for="author">Author:</label>
+          <input type="text" id="author" required />
+          <span class="error-message" id="author-error"></span>
+        </div>
+        <div>
+          <label for="pages">Pages:</label>
+          <input type="number" id="pages" required />
+          <span class="error-message" id="pages-error"></span>
+        </div>
 
+        <div>
+          <label for="read">Have you read this book?</label>
+          <input type="checkbox" id="read" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="addbtn">Add Book</button>
+          <button type="button" id="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Stats Counter Section -->
+    <div id="stats-container" class="stats-card">
+      <p>Total Books: <span id="stat-total">0</span></p>
+      <p>Read: <span id="stat-read">0</span></p>
+      <p>Not Read: <span id="stat-unread">0</span></p>
+    </div>
+
+    <!-- Where our book cards will show up -->
+    <div id="library-container"></div>
+  </body>
 </html>
